@@ -13,7 +13,7 @@ class BeerTableViewCell: UITableViewCell {
     
     private let beerImageView = UIImageView()
     private let nameLabel = UILabel()
-    private var imageData = Data()
+    private var imageData:Data?
     private var operation = Operation()
 
     override func awakeFromNib() {
@@ -60,11 +60,16 @@ class BeerTableViewCell: UITableViewCell {
     func configure(beer: Beer) {
         nameLabel.text = beer.name
         self.operation = BlockOperation {
-            self.beerImageView.image = UIImage(data: self.imageData)
+            if let data = self.imageData {
+                self.beerImageView.image = UIImage(data: data)
+            } else {
+                self.beerImageView.image = UIImage(named: "beer")
+            }
         }
         DispatchQueue.global(qos: .utility).async {
-            guard let data = Proxy.getImageDataForUrl(urlString: beer.imageUrl) else { return }
-            self.imageData = data
+            if let urlStr = beer.imageUrl,let data = Proxy.getImageDataForUrl(urlString: urlStr) {
+                self.imageData = data
+            }
             if !self.operation.isFinished && !OperationQueue.main.operations.contains(self.operation) {
                 OperationQueue.main.addOperation(self.operation)
             }
@@ -75,6 +80,7 @@ class BeerTableViewCell: UITableViewCell {
         nameLabel.text = ""
         operation.cancel()
         beerImageView.image = nil
+        imageData = nil
     }
 
 }

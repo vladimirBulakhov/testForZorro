@@ -25,23 +25,22 @@ class BeerListViewModel: BeerListViewModelDelegate {
     
     func getBeerList() {
         NetworkManager.getBeerList(forPage: page).subscribe { (beers) in
-            if var newBeerArray = try? self.beerArray.value() {
-                newBeerArray.append(contentsOf: beers)
-                self.beerArray.onNext(newBeerArray)
-            } else {
-                var newBeerArray = [Beer]()
-                newBeerArray.append(contentsOf: beers)
-                self.beerArray.onNext(newBeerArray)
+            if beers != [] {
+                if var newBeerArray = try? self.beerArray.value() {
+                    newBeerArray.append(contentsOf: beers)
+                    self.beerArray.onNext(newBeerArray)
+                } else {
+                    var newBeerArray = [Beer]()
+                    newBeerArray.append(contentsOf: beers)
+                    self.beerArray.onNext(newBeerArray)
+                }
+            } else  {
+                self.lastPageIsReached = true
             }
         } onFailure: { (error) in
-            if error.localizedDescription == "The data couldn’t be read because it is missing." {
-                self.lastPageIsReached = true
-            } else {
-                print(error.localizedDescription)
-                self.errorSubject.onNext(error.localizedDescription)
-            }
+            self.errorSubject.onNext(error.localizedDescription)
         }.disposed(by: disposeBag)
-        page += 1
+        self.page += 1
     }
     
     func updateListIfNeeded(index: Int) {
@@ -63,12 +62,8 @@ class BeerListViewModel: BeerListViewModelDelegate {
                 self.beerArray.onNext(beers)
                 completable(.completed)
             } onFailure: { (error) in
-                if error.localizedDescription == "The data couldn’t be read because it is missing." {
-                    self.lastPageIsReached = true
-                } else {
-                    print(error.localizedDescription)
-                    self.errorSubject.onNext(error.localizedDescription)
-                }
+                print(error.localizedDescription)
+                self.errorSubject.onNext(error.localizedDescription)
                 completable(.error(error))
             }.disposed(by: self.disposeBag)
             self.page += 1

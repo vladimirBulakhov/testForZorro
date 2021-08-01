@@ -20,9 +20,9 @@ class NetworkManager {
                             let decoder = JSONDecoder()
                             decoder.keyDecodingStrategy = .convertFromSnakeCase
                             let beerArray = try decoder.decode([Beer].self, from: data)
-                            //print(beerArray)
                             single(.success(beerArray))
                         } catch {
+                            print(error)
                             single(.failure(error))
                         }
                     case.failure(let error):

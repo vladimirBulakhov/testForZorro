@@ -74,9 +74,13 @@ class DetailBeerViewController: UIViewController {
     
     private func setViews() {
         DispatchQueue.global(qos: .utility).async {
-            if let imageData = Proxy.getImageDataForUrl(urlString: self.viewModel.beer.imageUrl)  {
+            if let urlStr = self.viewModel.beer.imageUrl ,let imageData = Proxy.getImageDataForUrl(urlString: urlStr)  {
                 DispatchQueue.main.async {
                     self.beerImageView.image = UIImage(data: imageData)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.beerImageView.image = UIImage(named: "beer")
                 }
             }
         }
@@ -170,17 +174,19 @@ class DetailBeerViewController: UIViewController {
             label.textAlignment = .left
             ingradientsStackView.addArrangedSubview(label)
         }
-        let yeastLabel = UILabel()
-        yeastLabel.text = "Yeast"
-        yeastLabel.textAlignment = .center
-        yeastLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        ingradientsStackView.addArrangedSubview(yeastLabel)
-        let label = UILabel()
-        label.text = "\(viewModel.beer.ingredients.yeast)"
-        label.lineBreakMode = .byTruncatingTail
-        label.numberOfLines = 0
-        label.textAlignment = .left
-        ingradientsStackView.addArrangedSubview(label)
+        if viewModel.beer.ingredients.yeast != nil {
+            let yeastLabel = UILabel()
+            yeastLabel.text = "Yeast"
+            yeastLabel.textAlignment = .center
+            yeastLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            ingradientsStackView.addArrangedSubview(yeastLabel)
+            let label = UILabel()
+            label.text = "\(viewModel.beer.ingredients.yeast ?? "")"
+            label.lineBreakMode = .byTruncatingTail
+            label.numberOfLines = 0
+            label.textAlignment = .left
+            ingradientsStackView.addArrangedSubview(label)
+        }
     }
     
     private func setupGreatWithStackView() {

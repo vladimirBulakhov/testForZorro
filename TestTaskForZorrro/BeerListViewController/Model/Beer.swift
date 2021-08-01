@@ -7,18 +7,22 @@
 
 import Foundation
 
-struct Beer: Decodable {
+struct Beer: Decodable, Equatable {
+    static func == (lhs: Beer, rhs: Beer) -> Bool {
+        return lhs.name == rhs.name 
+    }
+    
     let name: String
     let description: String
     let ingredients: IngredientsModel
     let foodPairing: [String]
-    let imageUrl: String
+    let imageUrl: String?
 }
 
 struct IngredientsModel: Decodable {
     let malt: [Ingredient]
     let hops: [Ingredient]
-    let yeast: String
+    let yeast: String?
 }
 
 struct Ingredient: Decodable {
