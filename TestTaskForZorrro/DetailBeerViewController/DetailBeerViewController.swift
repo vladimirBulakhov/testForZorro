@@ -139,7 +139,7 @@ class DetailBeerViewController: UIViewController {
         }
         nameLabel.text = viewModel.beer.name
         descriptionLabel.text = viewModel.beer.description
-        //beerImageView.contentMode = .scaleAspectFit
+        beerImageView.contentMode = .scaleAspectFit
     }
     
     private func setupIngradientsStackView() {

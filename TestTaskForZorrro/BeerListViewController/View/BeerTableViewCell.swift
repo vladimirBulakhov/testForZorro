@@ -54,14 +54,13 @@ class BeerTableViewCell: UITableViewCell {
             make.top.equalTo(contentView.snp.top).offset(20)
             make.bottom.equalTo(contentView.snp.bottom).offset(-20)
         }
+        beerImageView.contentMode = .scaleAspectFit
     }
     
     func configure(beer: Beer) {
         nameLabel.text = beer.name
         self.operation = BlockOperation {
-            if !(self.operation.isCancelled) {
-                self.beerImageView.image = UIImage(data: self.imageData)
-            }
+            self.beerImageView.image = UIImage(data: self.imageData)
         }
         DispatchQueue.global(qos: .utility).async {
             guard let data = Proxy.getImageDataForUrl(urlString: beer.imageUrl) else { return }
