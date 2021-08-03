@@ -17,6 +17,8 @@
 		CD36A66F26B04B6F00E0460C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD36A66D26B04B6F00E0460C /* Main.storyboard */; };
 		CD36A67426B04B7000E0460C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD36A67226B04B7000E0460C /* LaunchScreen.storyboard */; };
 		CD37CB6926B736A200CE58C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD37CB6826B736A200CE58C6 /* Assets.xcassets */; };
+		CDC08C2E26B9314B00E293CC /* DownloadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC08C2D26B9314B00E293CC /* DownloadingImageView.swift */; };
+		CDC08C3126B9328000E293CC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC08C3026B9328000E293CC /* Extensions.swift */; };
 		CDF1F92126B04E6D00510557 /* BeerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1F92026B04E6D00510557 /* BeerListViewModel.swift */; };
 		CDF1F92426B04F8000510557 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1F92326B04F8000510557 /* NetworkManager.swift */; };
 		CDF1F92826B0506000510557 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CDF1F92726B0506000510557 /* SnapKit */; };
@@ -40,6 +42,8 @@
 		CD36A67326B04B7000E0460C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD36A67526B04B7000E0460C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD37CB6826B736A200CE58C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CDC08C2D26B9314B00E293CC /* DownloadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingImageView.swift; sourceTree = "<group>"; };
+		CDC08C3026B9328000E293CC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CDF1F92026B04E6D00510557 /* BeerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListViewModel.swift; sourceTree = "<group>"; };
 		CDF1F92326B04F8000510557 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CDF1F93426B0514D00510557 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
@@ -66,6 +70,7 @@
 			children = (
 				CD36A66B26B04B6F00E0460C /* BeerListViewController.swift */,
 				CD0B216626B05EEF00D9E548 /* BeerTableViewCell.swift */,
+				CDC08C2D26B9314B00E293CC /* DownloadingImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 				CDF1F92326B04F8000510557 /* NetworkManager.swift */,
 				CDF1F93426B0514D00510557 /* Builder.swift */,
 				CD117E4726B1523900D00912 /* Proxy.swift */,
+				CDC08C3026B9328000E293CC /* Extensions.swift */,
 				CDF1F91F26B04DF400510557 /* BeerListViewController */,
 				CD117E4A26B187DA00D00912 /* DetailBeerViewController */,
 				CD37CB6826B736A200CE58C6 /* Assets.xcassets */,
@@ -228,7 +234,9 @@
 				CD0B216726B05EEF00D9E548 /* BeerTableViewCell.swift in Sources */,
 				CD117E4D26B1881900D00912 /* DetailBeerViewController.swift in Sources */,
 				CD36A66826B04B6F00E0460C /* AppDelegate.swift in Sources */,
+				CDC08C3126B9328000E293CC /* Extensions.swift in Sources */,
 				CD36A66A26B04B6F00E0460C /* SceneDelegate.swift in Sources */,
+				CDC08C2E26B9314B00E293CC /* DownloadingImageView.swift in Sources */,
 				CDF1F93826B0555A00510557 /* Beer.swift in Sources */,
 				CDF1F93526B0514D00510557 /* Builder.swift in Sources */,
 			);

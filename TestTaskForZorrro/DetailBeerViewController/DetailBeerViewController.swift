@@ -68,7 +68,7 @@ class DetailBeerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "backgroundColor")
+        view.backgroundColor = .backgroundColor
         setViews()
     }
     
@@ -80,7 +80,7 @@ class DetailBeerViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.beerImageView.image = UIImage(named: "beer")
+                    self.beerImageView.image = UIImage.defaultBeerImage
                 }
             }
         }

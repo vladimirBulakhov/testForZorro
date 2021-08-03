@@ -11,10 +11,8 @@ import SnapKit
 
 class BeerTableViewCell: UITableViewCell {
     
-    private let beerImageView = UIImageView()
+    private let beerImageView = DownloadingImageView()
     private let nameLabel = UILabel()
-    private var imageData:Data?
-    private var operation = Operation()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,28 +57,12 @@ class BeerTableViewCell: UITableViewCell {
     
     func configure(beer: Beer) {
         nameLabel.text = beer.name
-        self.operation = BlockOperation {
-            if let data = self.imageData {
-                self.beerImageView.image = UIImage(data: data)
-            } else {
-                self.beerImageView.image = UIImage(named: "beer")
-            }
-        }
-        DispatchQueue.global(qos: .utility).async {
-            if let urlStr = beer.imageUrl,let data = Proxy.getImageDataForUrl(urlString: urlStr) {
-                self.imageData = data
-            }
-            if !self.operation.isFinished && !OperationQueue.main.operations.contains(self.operation) {
-                OperationQueue.main.addOperation(self.operation)
-            }
-        }
+        beerImageView.downloadAndSetImage(for: beer.imageUrl)
     }
     
     override func prepareForReuse() {
         nameLabel.text = ""
-        operation.cancel()
         beerImageView.image = nil
-        imageData = nil
     }
 
 }
