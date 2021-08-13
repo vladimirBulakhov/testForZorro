@@ -32,9 +32,9 @@ class BeerListViewController: UIViewController {
     
     private func setBindings() {
         tableView.refreshControl?.rx.controlEvent(.valueChanged).subscribe(onNext: { _ in
-            self.viewModel.refreshList().subscribe {
+            self.viewModel.refreshList().subscribe { (beers) in
                 self.tableView.refreshControl?.endRefreshing()
-            } onError: { (error) in
+            } onFailure: { (error) in
                 self.presentAlert(withMessage: error.localizedDescription)
                 self.tableView.refreshControl?.endRefreshing()
             }.disposed(by: self.disposeBag)

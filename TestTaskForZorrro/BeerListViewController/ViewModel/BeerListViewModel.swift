@@ -13,7 +13,7 @@ protocol BeerListViewModelDelegate {
     var errorSubject: PublishSubject<String> { get }
     func getBeerList()
     func updateListIfNeeded(index: Int)
-    func refreshList() -> Completable
+    func refreshList() -> Single<[Beer]>
 }
 
 class BeerListViewModel: BeerListViewModelDelegate {
@@ -54,20 +54,13 @@ class BeerListViewModel: BeerListViewModelDelegate {
         }
     }
     
-    func refreshList() -> Completable {
+    func refreshList() -> Single<[Beer]> {
         page = 1
         lastPageIsReached = false
-        return Completable.create { completable in
-            NetworkManager.getBeerList(forPage: self.page).subscribe { (beers) in
-                self.beerArray.onNext(beers)
-                completable(.completed)
-            } onFailure: { (error) in
-                print(error.localizedDescription)
-                self.errorSubject.onNext(error.localizedDescription)
-                completable(.error(error))
-            }.disposed(by: self.disposeBag)
-            self.page += 1
-            return Disposables.create {}
+        return NetworkManager.getBeerList(forPage: self.page).do { (beers) in
+            self.beerArray.onNext(beers)
+        } onError: { (error) in
+            self.errorSubject.onNext(error.localizedDescription)
         }
     }
 }

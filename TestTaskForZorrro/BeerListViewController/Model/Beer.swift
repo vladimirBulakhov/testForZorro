@@ -10,7 +10,7 @@ import Foundation
 struct Beer: Decodable, Equatable {
     static func == (lhs: Beer, rhs: Beer) -> Bool {
         return lhs.name == rhs.name 
-    }
+    } 
     
     let name: String
     let description: String
